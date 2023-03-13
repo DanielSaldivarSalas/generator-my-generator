@@ -1,4 +1,4 @@
-# generator-my-generator [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-my-generator 
 > Generator of yeoman generators 
 
 ## Installation
