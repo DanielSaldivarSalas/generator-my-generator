@@ -1,13 +1,7 @@
 import { BaseGenerator, FileSystemEntity, getDirname, TemplateEntity } from "../base";
 
-import path from "path";
-
-
-
 interface PromptAnswers {
-  someAnswer: string;
-  username: boolean;
-  title: string;
+  generatorName: string;
 }
 
 
@@ -15,30 +9,13 @@ export default class extends BaseGenerator {
 
   answers!: PromptAnswers;
 
-  initializing() {
-    this.composeWith(path.resolve(getDirname(import.meta.url), "../wow"), {
-      arguments: [this.options.projectName]
-    });
-  }
 
   async prompting() {
     const answers = await this.prompt([
       {
-        type: "confirm",
-        name: "someAnswer",
-        message: "Would you like to enable this option?",
-        default: true
-      },
-      {
         type: "input",
-        name: "username",
-        message: "What is your username?",
-        store: false
-      },
-      {
-        type: "input",
-        name: "title",
-        message: "tile: ",
+        name: "generatorName",
+        message: "What's the Generator Name? ",
         store: false
       }
     ]);
@@ -49,27 +26,36 @@ export default class extends BaseGenerator {
   }
 
   writing() {
-
+    const PROJECT_NAME = `generator-${this.answers.generatorName}`;
     const files: FileSystemEntity[] = [
-      { currentName: "dummyfile.txt" },
-      //  { currentName: "_gitignore", newName: ".gitignore" }
+      { currentName: "_gitignore", newName: ".gitignore" },
+      { currentName: "tsconfig.json" },
+      { currentName: ".mocharc.json" },
+      { currentName: "LICENSE" },
+      { currentName: "src/base.ts" },
+      { currentName: "src/app/index.ts" },
+      { currentName: "src/wow/index.ts" },
+      { currentName: "src/wow/templates/_gitignore" },
+      { currentName: "src/app/templates/index.html" },
+      { currentName: "src/app/templates/dummyfile.txt" }
     ];
 
     files.forEach(el => {
       if (el.newName) {
-        this.copyFileSystemEntity(el.currentName, el.newName);
+        this.copyFileSystemEntity(el.currentName, `${PROJECT_NAME}/${el.newName}`);
       } else {
-        this.copyFileSystemEntity(el.currentName);
+        this.copyFileSystemEntity(el.currentName, `${PROJECT_NAME}/${el.currentName}`);
       }
     });
 
 
     const templates: TemplateEntity[] = [
-      { currentName: "index.html", newName: "public/index.html", data: { title: this.answers.title } }
+      { currentName: "package.json", data: { generatorName: `${this.answers.generatorName}` } },
+      { currentName: "test/appTest.spec.ts", data: { generatorName: `${this.answers.generatorName}` } }
     ];
 
     templates.forEach(el => {
-      this.useTemplate(el.currentName, el.newName, el.data);
+      this.useTemplate(el.currentName, `${PROJECT_NAME}/${el.currentName}`, el.data);
     });
 
   }

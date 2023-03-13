@@ -1,4 +1,4 @@
-import { BaseGenerator, FileSystemEntity } from "../base";
+import { BaseGenerator, FileSystemEntity } from "../base.js";
 
 
 const files: FileSystemEntity[] = [
