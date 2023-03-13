@@ -99,5 +99,14 @@ describe("generator-my-generator:app", () => {
 
   });
 
+  it("Create Makefile", () => {
+
+    assert(
+      fs.existsSync(`${PROJECT_NAME}/Makefile`),
+      "Makefile should be created"
+    );
+
+  });
+
 });
 

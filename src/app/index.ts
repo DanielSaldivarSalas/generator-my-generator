@@ -32,6 +32,7 @@ export default class extends BaseGenerator {
       { currentName: "tsconfig.json" },
       { currentName: ".mocharc.json" },
       { currentName: "LICENSE" },
+      { currentName: "Makefile" },
       { currentName: "src/base.ts" },
       { currentName: "src/app/index.ts" },
       { currentName: "src/wow/index.ts" },
