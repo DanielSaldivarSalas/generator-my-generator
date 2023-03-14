@@ -37,7 +37,7 @@
   "license": "MIT",
   "dependencies": {
     "luxon": "^1.25.0",
-    "yeoman-generator": "^5.7.0"
+    "yeoman-generator": "5.7.0"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
