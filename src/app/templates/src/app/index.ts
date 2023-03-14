@@ -8,32 +8,29 @@ import {
 import path from "path";
 
 interface PromptAnswers {
-  someAnswer: string;
-  username: boolean;
+  generatorName: boolean;
   title: string;
+  projectName: string;
 }
 
 export default class extends BaseGenerator {
   answers!: PromptAnswers;
 
   initializing() {
-    this.composeWith(path.resolve(getDirname(import.meta.url), "../wow"), {
-      arguments: [this.options.projectName]
-    });
   }
 
   async prompting() {
     const answers = await this.prompt([
-      {
+      /*{
         type: "confirm",
         name: "someAnswer",
         message: "Would you like to enable this option?",
         default: true
-      },
+      }, */
       {
         type: "input",
-        name: "username",
-        message: "What is your username?",
+        name: "generatorName",
+        message: "What's the sub Generator Name? ",
         store: false
       },
       {
@@ -45,6 +42,16 @@ export default class extends BaseGenerator {
     ]);
 
     this.answers = answers;
+
+    const PROJECT_NAME = `generator-${this.answers.generatorName}`;
+
+    this.answers.projectName = PROJECT_NAME;
+
+
+    this.composeWith(path.resolve(getDirname(import.meta.url), "../wow"), {
+      arguments: [this.options.projectName]
+    });
+
   }
 
   writing() {
@@ -57,7 +64,7 @@ export default class extends BaseGenerator {
       if (el.newName) {
         this.copyFileSystemEntity(el.currentName, el.newName);
       } else {
-        this.copyFileSystemEntity(el.currentName);
+        this.copyFileSystemEntity(el.currentName, `${this.answers.projectName}/${el.currentName}`);
       }
     });
 
@@ -70,7 +77,7 @@ export default class extends BaseGenerator {
     ];
 
     templates.forEach(el => {
-      this.useTemplate(el.currentName, el.newName, el.data);
+      this.useTemplate(el.currentName, `${this.answers.projectName}/${el.newName}`, el.data);
     });
   }
 }
