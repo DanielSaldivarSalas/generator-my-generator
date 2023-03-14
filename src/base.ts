@@ -1,4 +1,3 @@
-
 import Generator from "yeoman-generator";
 
 import { fileURLToPath } from "url";
@@ -27,21 +26,26 @@ export function getDirname(metaUrl: string): string {
   return path.dirname(getFilename(metaUrl));
 }
 
-
 export class BaseGenerator extends Generator {
-  copyFileSystemEntity(originalFileSystemEntity: string, newFileSystemEntity: string = originalFileSystemEntity) {
+  copyFileSystemEntity(
+    originalFileSystemEntity: string,
+    newFileSystemEntity: string = originalFileSystemEntity
+  ) {
     this.fs.copy(
       this.templatePath(originalFileSystemEntity),
       this.destinationPath(newFileSystemEntity)
     );
   }
 
-  useTemplate(originalFilename: string, newFilename: string = originalFilename, data: object = {}) {
+  useTemplate(
+    originalFilename: string,
+    newFilename: string = originalFilename,
+    data: object = {}
+  ) {
     this.fs.copyTpl(
       this.templatePath(originalFilename),
       this.destinationPath(newFilename),
       data
     );
   }
-
 }

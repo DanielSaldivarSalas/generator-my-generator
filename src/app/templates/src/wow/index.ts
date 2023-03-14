@@ -1,16 +1,12 @@
 import { BaseGenerator, FileSystemEntity } from "../base.js";
 
-
 const files: FileSystemEntity[] = [
   //  { currentName: "dummyfile.txt" },
   { currentName: "_gitignore", newName: ".gitignore" }
 ];
 
 export default class WowGenerator extends BaseGenerator {
-
-  initializing() {
-
-  }
+  initializing() {}
 
   prompting() {
     // Have Yeoman greet the user.
@@ -28,7 +24,6 @@ export default class WowGenerator extends BaseGenerator {
         store: true
       }
     ];
-
   }
 
   writing() {
@@ -39,7 +34,5 @@ export default class WowGenerator extends BaseGenerator {
         this.copyFileSystemEntity(el.currentName);
       }
     });
-
   }
-
-};
+}
