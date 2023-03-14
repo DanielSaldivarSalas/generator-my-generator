@@ -30,7 +30,6 @@ export default class extends BaseGenerator {
     const files: FileSystemEntity[] = [
       { currentName: "_gitignore", newName: ".gitignore" },
       { currentName: "tsconfig.json" },
-      { currentName: ".mocharc.json" },
       { currentName: "LICENSE" },
       { currentName: "Makefile" },
       { currentName: "src/base.ts" },
@@ -52,7 +51,6 @@ export default class extends BaseGenerator {
 
     const templates: TemplateEntity[] = [
       { currentName: "package.json", data: { generatorName: `${this.answers.generatorName}` } },
-      { currentName: "test/appTest.spec.ts", data: { generatorName: `${this.answers.generatorName}` } }
     ];
 
     templates.forEach(el => {
