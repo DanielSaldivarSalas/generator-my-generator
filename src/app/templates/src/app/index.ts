@@ -47,9 +47,10 @@ export default class extends BaseGenerator {
 
     this.answers.projectName = PROJECT_NAME;
 
-
+    this.composeWith
     this.composeWith(path.resolve(getDirname(import.meta.url), "../wow"), {
-      arguments: [this.options.projectName]
+      arguments: [this.options.projectName],
+
     });
 
   }
