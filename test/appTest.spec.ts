@@ -22,7 +22,6 @@ describe("generator-my-generator:app", () => {
     }
   });
 
-
   it("creates configuration files", () => {
     assert(
       fs.existsSync(`${PROJECT_NAME}/.gitignore`),
@@ -43,7 +42,6 @@ describe("generator-my-generator:app", () => {
       fs.existsSync(`${PROJECT_NAME}/.mocharc.json`),
       ".mocharc should be created"
     );
-
   });
 
   it("creates files from templates", () => {
@@ -59,7 +57,6 @@ describe("generator-my-generator:app", () => {
   });
 
   it("Create src files", () => {
-
     assert(
       fs.existsSync(`${PROJECT_NAME}/src/base.ts`),
       "src/base.ts should be created"
@@ -70,17 +67,13 @@ describe("generator-my-generator:app", () => {
       "src/app/index.ts should be created"
     );
 
-
     assert(
       fs.existsSync(`${PROJECT_NAME}/src/wow/index.ts`),
       "src/wow/index.ts should be created"
     );
-
-
   });
 
   it("Create template files", () => {
-
     assert(
       fs.existsSync(`${PROJECT_NAME}/src/wow/templates/_gitignore`),
       "src/wow/templates/_gitignore should be created"
@@ -95,18 +88,12 @@ describe("generator-my-generator:app", () => {
       fs.existsSync(`${PROJECT_NAME}/src/app/templates/dummyfile.txt`),
       "src/app/templates/dummyfile.txt should be created"
     );
-
-
   });
 
   it("Create Makefile", () => {
-
     assert(
       fs.existsSync(`${PROJECT_NAME}/Makefile`),
       "Makefile should be created"
     );
-
   });
-
 });
-

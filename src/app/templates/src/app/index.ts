@@ -1,8 +1,11 @@
-import { BaseGenerator, FileSystemEntity, getDirname, TemplateEntity } from "../base.js";
+import {
+  BaseGenerator,
+  FileSystemEntity,
+  getDirname,
+  TemplateEntity
+} from "../base.js";
 
 import path from "path";
-
-
 
 interface PromptAnswers {
   someAnswer: string;
@@ -10,9 +13,7 @@ interface PromptAnswers {
   title: string;
 }
 
-
 export default class extends BaseGenerator {
-
   answers!: PromptAnswers;
 
   initializing() {
@@ -44,14 +45,11 @@ export default class extends BaseGenerator {
     ]);
 
     this.answers = answers;
-
-
   }
 
   writing() {
-
     const files: FileSystemEntity[] = [
-      { currentName: "dummyfile.txt" },
+      { currentName: "dummyfile.txt" }
       //  { currentName: "_gitignore", newName: ".gitignore" }
     ];
 
@@ -63,15 +61,16 @@ export default class extends BaseGenerator {
       }
     });
 
-
     const templates: TemplateEntity[] = [
-      { currentName: "index.html", newName: "public/index.html", data: { title: this.answers.title } }
+      {
+        currentName: "index.html",
+        newName: "public/index.html",
+        data: { title: this.answers.title }
+      }
     ];
 
     templates.forEach(el => {
       this.useTemplate(el.currentName, el.newName, el.data);
     });
-
   }
-
-};
+}

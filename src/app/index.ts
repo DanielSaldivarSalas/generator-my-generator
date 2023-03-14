@@ -1,14 +1,16 @@
-import { BaseGenerator, FileSystemEntity, getDirname, TemplateEntity } from "../base";
+import {
+  BaseGenerator,
+  FileSystemEntity,
+  getDirname,
+  TemplateEntity
+} from "../base";
 
 interface PromptAnswers {
   generatorName: string;
 }
 
-
 export default class extends BaseGenerator {
-
   answers!: PromptAnswers;
-
 
   async prompting() {
     const answers = await this.prompt([
@@ -21,8 +23,6 @@ export default class extends BaseGenerator {
     ]);
 
     this.answers = answers;
-
-
   }
 
   writing() {
@@ -43,22 +43,35 @@ export default class extends BaseGenerator {
 
     files.forEach(el => {
       if (el.newName) {
-        this.copyFileSystemEntity(el.currentName, `${PROJECT_NAME}/${el.newName}`);
+        this.copyFileSystemEntity(
+          el.currentName,
+          `${PROJECT_NAME}/${el.newName}`
+        );
       } else {
-        this.copyFileSystemEntity(el.currentName, `${PROJECT_NAME}/${el.currentName}`);
+        this.copyFileSystemEntity(
+          el.currentName,
+          `${PROJECT_NAME}/${el.currentName}`
+        );
       }
     });
 
-
     const templates: TemplateEntity[] = [
-      { currentName: "package.json", data: { generatorName: `${this.answers.generatorName}` } },
-      { currentName: "test/appTest.spec.ts", data: { generatorName: `${this.answers.generatorName}` } }
+      {
+        currentName: "package.json",
+        data: { generatorName: `${this.answers.generatorName}` }
+      },
+      {
+        currentName: "test/appTest.spec.ts",
+        data: { generatorName: `${this.answers.generatorName}` }
+      }
     ];
 
     templates.forEach(el => {
-      this.useTemplate(el.currentName, `${PROJECT_NAME}/${el.currentName}`, el.data);
+      this.useTemplate(
+        el.currentName,
+        `${PROJECT_NAME}/${el.currentName}`,
+        el.data
+      );
     });
-
   }
-
-};
+}
