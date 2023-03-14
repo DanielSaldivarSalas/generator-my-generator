@@ -31,6 +31,7 @@ export default class extends BaseGenerator {
       { currentName: "_gitignore", newName: ".gitignore" },
       { currentName: "tsconfig.json" },
       { currentName: "LICENSE" },
+      { currentName: ".mocharc.json" },
       { currentName: "Makefile" },
       { currentName: "src/base.ts" },
       { currentName: "src/app/index.ts" },
